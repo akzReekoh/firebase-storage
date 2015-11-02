@@ -1,0 +1,14 @@
+{
+  "firebase_url": {
+	"label": "Firebase URL",
+	"type": "String",
+	"required": true,
+	"help": "Kindly specify the Firebase URL to send data to."
+  },
+  "token": {
+	"label": "Auth Token",
+	"type": "String",
+	"required": true,
+	"help": "Kindly specify the authentication token to use."
+  }
+}
