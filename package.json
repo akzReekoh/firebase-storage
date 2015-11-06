@@ -1,7 +1,7 @@
 {
   "name": "firebase-storage",
   "description": "Firebase Storage Plugin for the Reekoh IoT Platform. Enables a Reekoh instance to integrate and synchronize device data to Firebase.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Reekoh, Inc.",
   "main": "app.js",
   "scripts": {
