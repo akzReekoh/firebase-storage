@@ -54,6 +54,7 @@ platform.once('ready', function (options) {
 	firebaseClient = new Firebase(options.firebase_url);
 
 	firebaseClient.authWithCustomToken(options.token, function () {
+		platform.log('Firebase Storage initialized.');
 		platform.notifyReady();
 	});
 });
