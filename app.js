@@ -1,16 +1,15 @@
 'use strict';
 
-var platform = require('./platform'),
+var uuid     = require('node-uuid'),
+	platform = require('./platform'),
 	firebaseClient;
 
 /*
  * Listen for the data event.
  */
 platform.on('data', function (data) {
-	if (!data.id) {
-		var uuid = require('node-uuid');
+	if (!data.id)
 		data.id = uuid.v4();
-	}
 
 	firebaseClient.child(data.id).set(data, function (error) {
 		if (error) {
@@ -33,15 +32,17 @@ platform.on('close', function () {
 	var domain = require('domain');
 	var d = domain.create();
 
-	d.on('error', function(error) {
+	d.on('error', function (error) {
 		console.error(error);
 		platform.handleException(error);
 		platform.notifyClose();
+		d.exit();
 	});
 
-	d.run(function() {
+	d.run(function () {
 		firebaseClient.unauth();
 		platform.notifyClose();
+		d.exit();
 	});
 });
 
