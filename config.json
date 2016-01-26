@@ -7,7 +7,7 @@
   },
   "token": {
 	"label": "Auth Token",
-	"type": "String",
+	"type": "Password",
 	"required": true,
 	"help": "Kindly specify the authentication token to use."
   }
