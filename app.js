@@ -2,12 +2,12 @@
 
 var uuid     = require('node-uuid'),
 	platform = require('./platform'),
+	isPlainObject = require('lodash.isplainobject'),
+	isArray = require('lodash.isarray'),
+	async = require('async'),
 	firebaseClient;
 
-/*
- * Listen for the data event.
- */
-platform.on('data', function (data) {
+let sendData = (data) => {
 	if (!data.id)
 		data.id = uuid.v4();
 
@@ -23,6 +23,19 @@ platform.on('data', function (data) {
 			}));
 		}
 	});
+};
+
+platform.on('data', function (data) {
+	if(isPlainObject(data)){
+		sendData(data);
+	}
+	else if(isArray(data)){
+		async.each(data, function(datum){
+			sendData(datum);
+		});
+	}
+	else
+		platform.handleException(new Error(`Invalid data received. Data must be a valid Array/JSON Object or a collection of objects. Data: ${data}`));
 });
 
 /*
